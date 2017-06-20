@@ -1,8 +1,14 @@
 package in.shopperstreet.PlaylistDownloader;
 
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,13 +29,43 @@ public class Utube {
 
     public void setUp(ArrayList<String> videoList) throws Exception {
 
+
         System.setProperty("webdriver.chrome.driver", "/Users/prakash.s/Desktop/chromedriver");
-        driver = new ChromeDriver();
+
+        String downloadFilepath = "/Users/prakash.s/Downloads/selea";
+
+
+
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+
+        chromePrefs.put("download.default_directory", downloadFilepath);
+
+        ChromeOptions options = new ChromeOptions();
+
+        options.setExperimentalOption("prefs", chromePrefs);
+
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+
+
+
+        driver = new ChromeDriver(cap);
+
         baseUrl = "http://en.savefrom.net/";
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
         wait = new WebDriverWait(driver, 5);
+
         videoIds = videoList;
+
         testUtube();
+
     }
 
 
@@ -53,7 +89,7 @@ public class Utube {
 
 
     public void tearDown() throws Exception {
-        driver.quit();
+//        driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
 //            fail(verificationErrorString);

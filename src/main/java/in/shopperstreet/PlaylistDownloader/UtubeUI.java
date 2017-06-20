@@ -13,8 +13,9 @@ public class UtubeUI implements ActionListener{
 
     JFrame jFrame;
     JPanel jPanel;
-    JButton jButton;
-    JTextField jTextField;
+    JButton downloadBtn;
+    JTextField playlistText;
+
 
     private String playlistId;
 
@@ -35,36 +36,36 @@ public class UtubeUI implements ActionListener{
 
         jFrame = new JFrame("PlaylistDownloader");
         jPanel = new JPanel();
-        jTextField = new JTextField(30);
-        jButton = new JButton("Download");
+        playlistText = new JTextField(30);
+        downloadBtn = new JButton("Download");
 
 
         // Add to jFrame
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(400, 200);
+        jFrame.setSize(600, 250);
         jFrame.setVisible(true);
         jFrame.getContentPane().add(jPanel);
 
         //Add to jPanel
-        jPanel.add(jTextField);
-        jPanel.add(jButton);
+        jPanel.add(playlistText);
+        jPanel.add(downloadBtn);
 
 
-        jTextField.requestFocus();
-        jTextField.setText("Prakash");
+        playlistText.requestFocus();
+        playlistText.setText("Prakash");
         jPanel.revalidate();     //Revalidate.. Else UI changes will not be reflected
 
         //Add eventlistener to the button
-        jButton.addActionListener(this);
+        downloadBtn.addActionListener(this);
 
     }
 
 
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == jButton){
+        if(e.getSource() == downloadBtn){
 
-            playlistId = jTextField.getText();
+            playlistId = playlistText.getText();
             caller.makeRequest(playlistId);
         }
     }
