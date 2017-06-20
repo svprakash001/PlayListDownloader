@@ -27,12 +27,12 @@ public class Utube {
     ArrayList<String> videoIds;
 
 
-    public void setUp(ArrayList<String> videoList) throws Exception {
+    public void setUp(ArrayList<String> videoList,String folderPath) throws Exception {
 
 
         System.setProperty("webdriver.chrome.driver", "/Users/prakash.s/Desktop/chromedriver");
 
-        String downloadFilepath = "/Users/prakash.s/Downloads/selea";
+        String downloadFilepath = folderPath;
 
 
 

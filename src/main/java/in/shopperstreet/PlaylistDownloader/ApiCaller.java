@@ -23,10 +23,13 @@ public class ApiCaller  {
 
     StringBuilder response;
 
+    String folderPath;
 
 
-    public void makeRequest(String playlistId){
 
+    public void makeRequest(String playlistId,String folderPath){
+
+        this.folderPath = folderPath;
 
         String param1 = "contentDetails";
         String param2 = "50";
@@ -94,7 +97,7 @@ public class ApiCaller  {
 
         try {
 
-            utube.setUp(videoIdsList);
+            utube.setUp(videoIdsList,folderPath);
 
         }catch (Exception e){
             e.printStackTrace();
